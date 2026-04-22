@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>巴城餐厅故事</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.loli.net/css?family=Noto+Serif+SC:400,700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: elevon, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Remove transition: all — only keep smaller transitions that won't affect scrolling */
+    section {
+      height: 100vh;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      /* keep opacity transitions only */
+      transition: opacity 0.6s ease;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transition: opacity 2.5s ease, filter 2.5s ease;
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      color: white;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* we'll generate progress dots dynamically, keep container styling */
+    .progress-container {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .progress-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      transition: all 0.35s ease;
+      cursor: pointer;
+    }
+    .progress-dot.active {
+      background: white;
+      transform: scale(1.4);
+    }
+
+    .music-control {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .music-control:hover { background: rgba(0,0,0,0.8); }
+
+    .hover-zoom { transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+    .hover-zoom:hover { transform: scale(1.05); }
+
+    #particles-js { position: absolute; width: 100%; height: 100%; z-index: 1; }
+
+    /* fade-in controlled by JS via .visible */
+    .fade-in-text {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-in-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .signboard { position: absolute; top: 20%; left: 10%; z-index: 5; opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease; }
+    .signboard.visible { opacity: 1; }
+
+    .kitchen-text { position: absolute; right: 10%; width: 40%; transform: translateX(30px); opacity: 0; transition: all 0.6s ease; }
+    .kitchen-text.visible { transform: translateX(0); opacity: 1; }
+
+    #scene5 { background-color: #000; }
+    #scene5 .content { text-align: left; opacity: 1; transition: opacity 0.6s ease; }
+
+    #returnButton { opacity: 1; transform: translateY(0); transition: all 0.3s ease; }
+
+    .desaturate { transition: filter 1.5s ease; }
+
+    .scene-content { opacity: 0; transition: opacity 0.8s ease; }
+    .scene-content.visible { opacity: 1; }
+
+    /* small responsive tweaks */
+    @media (max-width: 768px) {
+      .content { padding: 1rem; }
+      img.w-full { max-height: 40vh; object-fit: cover; }
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+  <!-- progress container (filled by JS) -->
+  <div class="progress-container" id="progressContainer"></div>
+
+  <!-- 音乐控制 -->
+  <div class="music-control" id="musicToggle" title="Toggle audio">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M15.536 8.464a5 5 0 010 7.072M12 6a7.975 7.975 0 015.657 2.343m0 0a7.975 7.975 0 010 11.314m-11.314 0a7.975 7.975 0 010-11.314m0 0a7.975 7.975 0 015.657-2.343" />
+    </svg>
+  </div>
+
+  <!-- 场景1：入口 -->
+  <section id="scene1">
+    <div class="parallax-bg" style="filter: brightness(0.7);"></div>
+    <div id="particles-js"></div>
+
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/ricebarn/rb6.jpg" alt="面条招牌"
+         style="position:absolute; top:2rem; left:50%; transform:translateX(-50%); width:700px; height:auto; z-index:5;">
+    <div class="content text-center"  style="margin-top: 500px;">
+      <div class="fade-in-text" id="line1">
+        <h1 class="text-5xl font-bold mb-6">Rice barn</h1>
+      </div>
+      <div class="fade-in-text" id="line2">
+        <p class="text-xl mb-4">This rice barn has no difference with the “lumbung” of the global south:</p>
+      </div>
+      <div class="fade-in-text" id="line3">
+        <p class="text-xl">they both dry barns for storage and dispersal; they both help local farmers to sell their produce; and they both collect surplus food so as to ensure a smoother transition in adverse situations</p>
+      </div>
+      <div class="animate-bounce text-4xl mt-8">↓</div>
+    </div>
+  </section>
+
+  <!-- 场景2 (街道记忆) -->
+  <section id="scene2" class="w-full">
+    <div class="parallax-bg"></div>
+    <div class="content">
+      <p class="text-xl mb-4">It has also witnessed the most communist way of working in the past: all were for the purpose of being pragmatic and productive. Ironically, the rice barn will soon become a cultural and creative park serving coffee, one of the most petite bourgeois and pretentious places we can think of.</p>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="hover-zoom">
+          <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/ricebarn/rb1.jpg" alt="旧巴城" class="shadow-lg w-full h-auto object-cover">
+        </div>
+        <div class="hover-zoom">
+          <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/ricebarn/rb2.jpg" alt="新巴城" class="shadow-lg w-full h-auto object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 场景3：哲学 -->
+  <section id="scene3">
+    <div class="parallax-bg"></div>
+    <div class="flex items-center justify-center h-full px-12">
+      <div class="w-1/3 flex-shrink-0">
+        <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/ricebarn/rb5.jpg" alt="餐厅内景" class="shadow-lg w-full max-w-md" style="height:auto;">
+      </div>
+      <div class="w-1/2 pl-12">
+        <p class="text-xl">
+          What’s even more irritating is that the two gigantic grain silos will remain intact, as natural spectacles or a landmark of the upcoming coffee park.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 场景4：传承 -->
+  <section id="scene4" class="desaturate">
+    <div class="parallax-bg" style="background-image: url('https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/ricebarn/rb7.JPG');"></div>
+    <div class="content">
+      <h2 class="text-3xl font-bold mb-4"> </h2>
+      <p class="text-xl"></p>
+    </div>
+  </section>
+
+  <!-- 场景5：余韵 / 结束 -->
+  <section id="scene5">
+    <div class="content">
+      <h2 class="text-4xl font-bold mb-8">We maintain a neutral attitude towards the establishment of the coffee park</h2>
+      <p class="text-xl mb-8">but after two or three decades, if people only know that the two grain silos represent the 
+        coffee park, some spirit of local solidarity will fade away forever
+        <br>
+        <br>
+      </p>
+      <button id="returnButton" class="bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition">
+      ↩ Next Story
+    </button>
+    </div>
+    
+  </section>
+
+  <!-- 音频 -->
+  <audio id="ambientSound" loop><source src="https://8bituniverse.com/sounds/ambient.mp3" type="audio/mpeg"></audio>
+  <audio id="restaurantAmbience" loop><source src="https://8bituniverse.com/sounds/restaurant.mp3" type="audio/mpeg"></audio>
+  <audio id="kitchenAmbience" loop><source src="https://8bituniverse.com/sounds/kitchen.mp3" type="audio/mpeg"></audio>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // ==== Particles init (unchanged) ====
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" }
+          }
+        }
+      });
+
+      // ==== Audio control ====
+      const musicToggle = document.getElementById('musicToggle');
+      const ambientSound = document.getElementById('ambientSound');
+      const restaurantAmbience = document.getElementById('restaurantAmbience');
+      const kitchenAmbience = document.getElementById('kitchenAmbience');
+      let isMusicPlaying = false;
+      musicToggle.addEventListener('click', () => {
+        if (isMusicPlaying) {
+          ambientSound.pause(); restaurantAmbience.pause(); kitchenAmbience.pause();
+        } else {
+          ambientSound.play(); restaurantAmbience.play(); kitchenAmbience.play();
+        }
+        isMusicPlaying = !isMusicPlaying;
+      });
+      // set initial volumes
+      ambientSound.volume = 0.3;
+      restaurantAmbience.volume = 0.1;
+      kitchenAmbience.volume = 0;
+
+      // ==== Generate progress dots based on number of sections ====
+      const sections = Array.from(document.querySelectorAll('section'));
+      const progressContainer = document.getElementById('progressContainer');
+      const dots = [];
+
+      sections.forEach((sec, idx) => {
+        const dot = document.createElement('div');
+        dot.className = 'progress-dot';
+        dot.dataset.index = idx;
+        dot.title = `Go to section ${idx + 1}`;
+        progressContainer.appendChild(dot);
+        dots.push(dot);
+
+        // click dot -> scroll to that section
+        dot.addEventListener('click', () => {
+          window.scrollTo({ top: sec.offsetTop, behavior: 'smooth' });
+        });
+      });
+
+      // helper to mark active dot
+      function setActiveIndex(index) {
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[index]) dots[index].classList.add('active');
+      }
+
+      // ==== IntersectionObserver: update active section & toggle content visibility ====
+      const observerOptions = { root: null, rootMargin: '0px', threshold: 0.55 };
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const idx = sections.indexOf(entry.target);
+            if (idx !== -1) {
+              setActiveIndex(idx);
+              // reveal the scene-content in this section
+              entry.target.querySelector('.scene-content')?.classList.add('visible');
+
+              // optional audio crossfades or scene-based actions:
+              if (entry.target.id === 'scene2') {
+                // example: fade restaurantAmbience up
+                fadeAudio(restaurantAmbience, 0.3, 800);
+                fadeAudio(kitchenAmbience, 0.0, 800);
+              } else if (entry.target.id === 'scene3') {
+                fadeAudio(kitchenAmbience, 0.2, 800);
+              } else if (entry.target.id === 'scene1') {
+                // nothing special here
+              }
+            }
+          } else {
+            // when leaving section, hide its scene-content (so fade-in happens again next time)
+            entry.target.querySelector('.scene-content')?.classList.remove('visible');
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(s => sectionObserver.observe(s));
+
+      // ==== Separate observer for .fade-in-text so each fade-in toggles every time it enters view ====
+      const fadeOptions = { root: null, rootMargin: '0px 0px -30% 0px', threshold: 0.1 };
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible');
+          }
+        });
+      }, fadeOptions);
+
+      document.querySelectorAll('.fade-in-text').forEach(el => fadeObserver.observe(el));
+
+
+      // ==== Audio fade helper ====
+      function fadeAudio(audioElement, targetVolume, duration) {
+        const startVolume = audioElement.volume;
+        const delta = targetVolume - startVolume;
+        const startTime = performance.now();
+        function step(now) {
+          const t = Math.min((now - startTime) / duration, 1);
+          audioElement.volume = startVolume + delta * t;
+          if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      // ==== Initialize: set first active dot and reveal the first scene's content if visible =====
+      setActiveIndex(0);
+      // check which sections are currently in view immediately
+      sections.forEach((s, idx) => {
+        const rect = s.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4) {
+          setActiveIndex(idx);
+          s.querySelector('.scene-content')?.classList.add('visible');
+        }
+      });
+
+      // Optional: handle resize so dot scroll positions remain accurate
+      window.addEventListener('resize', () => {
+        // nothing critical to do — but could re-calc offsets if needed
+      }, { passive: true });
+    });
+
+    document.getElementById('returnButton').addEventListener('click', function() {
+      window.location.href = "characters.html";
+      localStorage.setItem('returnedFrom', 'tour_ricebarn.html');
+      this.style.opacity = '0';
+      this.style.transform = 'translateY(30px)';
+      });
+  </script>
+</body>
+</html>

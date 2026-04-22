@@ -1,0 +1,115 @@
+.interaction-hints {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-family: elevon, sans-serif;
+        font-size: 14px;
+        color: #ffffff;
+        background: rgba(0, 0, 0);
+        padding: 10px 14px;
+        /* border-radius: 12px; */
+        backdrop-filter: blur(8px);
+        /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+        width: 180px;
+      }
+
+      .hint-line {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .hint-line img {
+        width: 25px;
+        height: 30px;
+        opacity: 0.8;
+      }
+
+      /* Optional subtle entrance animation */
+      .interaction-hints {
+        animation: fadeIn 1.2s ease forwards;
+        opacity: 0;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+.back-home-button
+{
+  position: absolute;
+  top: 200px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: elevon, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  background: rgb(0, 0, 0);
+  padding: 10px 14px;
+  /* border-radius: 12px; */
+  backdrop-filter: blur(8px);
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+  width: 180px;
+}
+
+.video-button
+{
+  position: absolute;
+  top: 270px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: elevon, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+  background: rgb(0, 0, 0);
+  padding: 0px 14px;
+  /* border-radius: 12px; */
+  backdrop-filter: blur(8px);
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+  width: 300px;
+}
+.video-button-text:hover 
+{
+  color: rgb(255, 255, 255);
+}
+
+.back-home-button-text 
+{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color:#ffffff;
+}
+.back-home-button-text:hover 
+{
+  color: rgb(255, 255, 255);
+  transform: scale(1.05);
+  text-decoration:underline;
+}
+
+      /* Optional subtle entrance animation */
+      .back-home-button {
+        animation: fadeIn 1.2s ease forwards;
+        opacity: 0;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, #52b6fd, #98bda2);
+  overflow: hidden;
+}

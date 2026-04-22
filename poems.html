@@ -1,0 +1,184 @@
+
+<!-- shadow_poetry/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Demolition</title>
+  <style>
+    body {
+      background-color: #000;
+      color: rgba(255,255,255,1);
+      min-height: 100vh;
+      padding-top: 2rem; /* gives breathing space */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; /* don't force everything to squeeze in center */
+    }
+
+    .image-container {
+      width: 70vw;
+      height: 70vh;
+      position: relative;
+      /* overflow: hidden; */
+      border-radius: 4px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      transition: all 0.8s ease;
+      cursor: pointer;
+    }
+    .image-container img, .image-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      position: absolute;
+      transition: opacity 1.5s ease;
+    }
+    .image-container img.active, .image-container video.active {
+      opacity: 1;
+    }
+
+    #returnButton {
+      font-size: 1.5rem;          /* Bigger text */
+      padding: 1rem 2rem;         /* Expand clickable area */
+      display: inline-block;      /* Prevent shrinking inside flex/grid parents */
+      transform: scale(1); 
+      min-width: 200px; 
+      margin-top: 2rem;
+    }
+    .poem {
+      margin-top: 2rem;
+      text-align: left;
+      opacity: 0.7;
+      font-size: 1.2rem;
+      line-height: 1.2;
+      max-width: 70vw;
+      transition: all 0.5s ease;
+      font-family: elevon, sans-serif;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <div class="poem">
+    <h1>Passerby</h1>
+    <p>
+        I’ve been here many times before…<br>
+        taking a taxi, arriving at four in the morning,<br>
+        leaving at the noisy hour of ten, through crowds and rotting leaves<br>
+        The sky is still dark. No one greets me,<br>
+        no one tells me I’ve come too early<br>
+        I can’t find a place to settle<br>
+        I’ve walked both banks of the canal<br>
+        the narrow alleys, shopfronts with or without people, I’ve walked them all<br>
+        Alright. I’ll return again from that nameless path<br>
+        to the broad street with its arching gate. Morning trembles amid the clamor<br>
+        The thought of doubleing back the way<br>
+        always makes me pause in hesitation<br>
+        These plastic bags, foam boxes, the cramped cages crowded with <br>
+        chickens, ducks, and geese, the basins dipped from the river,<br>
+        I’ve seen them all. Many living things<br>
+        have died this morning. I too have touched the water.<br>
+        The vendors of vegetables and fish still sit on the ground,<br>
+        watching me from the roadside,<br>
+        for they know I will soon be gone again<br>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </p>
+
+    <h1>Method Department</h1>
+    <p> 
+    The method of digging through water and soil<br>
+    The method daring to make the sun and the moon shine in the new sky<br>
+    The most immediate, effective method of building the new countryside<br>
+    Like the vacant slots on a Lego baseplate, beside<br>
+    neat rows of houses: a basketball hoop,<br>
+    a court, a multicolored ground; wating for tiny figures to be placed<br>
+    When the earth is still covered in materials,<br>
+    dust, and knots of souls;<br>
+    The method of installing pit latrines and flush toilets under the open sky<br>
+    Within the square and hollow cube,<br>
+    the bright and upright methods<br>
+    The method of renewal, the method of returning to garden and field<br>
+    To dwell or to abandon, clangs and clatters,<br>
+    methods hard to articulate, yet surely <br>
+    exist between the gaps of Chinese characters,<br>
+    disappearing into habitual forgetting<br>
+    <br>
+    Referred to by the three exposed red characters, Method Department,<br>
+    a tin house with pink roof and white walls,<br>
+    so light, yet holding infinite power of ruin,<br>
+    casually breaking the rusted soil and iron,<br>
+    moving anywhere it pleases; a dreadful thing upon the earth<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </p>
+    <h1>A Wintery Afternoon</h1>
+    <p>
+    When you walk deep into the fields <br>
+    you’ll notice the gaze of poultry <br>
+    Dogs, large and small, emerge from doorways <br>
+    followed by the elderly, and then those growing old <br>
+    <br>
+    No one gets any closer <br>
+    Creatures seem to have been instructed since birth: be silent <br>
+    And this river doesn’t belong to anyone either <br>
+    The unnamed ancient bridges, the unnamed rivers <br>
+    the entire village named after the big local lake, <br>
+    might not be much different <br>
+    <br>
+    The earth grayish-white –– <br>
+    when we’re about to return along the same path <br>
+    an old woman approaches, heading home <br>
+    looking us over as she walks <br>
+    She smiles while asking where we came from <br>
+    talking about the rare visitors here <br>
+    And then points into the distance, <br>
+    saying whose land this is, whose graves these are <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </p>
+
+
+</div>
+
+    <button id="returnButton" class="bg-white text-black text-xl px-9 py-6 font-bold transition transform hover:scale-110 hover:underline">↩ Return Home</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    document.getElementById('returnButton').addEventListener('click', () => {
+        window.location.href = "index.html";
+      });
+
+    // 粒子效果初始化
+    
+
+    // 图片切换逻辑
+    
+    
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+
+<!-- scroll_based_visual_story/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>视觉叙事之旅</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.loli.net/css?family=Noto+Sans+SC:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: elevon, sans-serif;
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      cursor: default;
+      overflow-x: hidden;
+    }
+    .scene {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      position: relative;
+    }
+    .scene.active {
+      opacity: 1;
+    }
+    .scene img {
+      max-width: 80%;
+      max-height: 60%;
+      object-fit: contain;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 25px rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .scene img:hover {
+      transform: scale(1.02);
+    }
+    .text-block {
+      max-width: 600px;
+      text-align: center;
+      padding: 0 2rem;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      background: rgba(0,0,0,0.5);
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+      margin: 1rem 0;
+      padding: 1.5rem;
+    }
+    #returnButton {
+      font-size: 1.5rem;          /* Bigger text */
+      padding: 1rem 2rem;         /* Expand clickable area */
+      display: inline-block;      /* Prevent shrinking inside flex/grid parents */
+      transform: scale(1); 
+      min-width: 200px; 
+      margin-top: 2rem;
+    }
+    .return-btn-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .return-btn {
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, #3a3a3a, #1a1a1a);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .return-btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .return-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles-js"></div>
+
+  <div class="scene" id="scene1">
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/fangdong/nh2.jpg" alt="场景1图片" class="clickable-img" data-sound="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/fangdong/fangfake asking.mp3">
+    <div class="text-block">
+      We thought the tin housed are the “方法科” that we are looking for, as it stood beside a pile of construction materials. But then we ran into someone who we thought would be the construction worker of the house but turned out to be the landowner, and the tin house in just his temporary residence, instead of 方法科
+    </div>
+  </div>
+
+  <div class="scene" id="scene2">
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/fangdong/nh3.jpg" alt="场景2图片" class="clickable-img">
+  </div>
+
+  <div class="scene" id="scene3">
+    <div class="text-block">
+      He told us that although they own the land, there’s still a strict policy determining the exact height, width, and length of each of the self-built houses — what you do with the interior is none of the policy’s business, but you must look exactly the same on the outside
+    </div>
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/fangdong/nh1.jpg" alt="场景3图片" class="clickable-img" data-sound="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/fangdong/design reveal.mp3">
+  </div>
+
+  <div class="scene" id="scene4">
+    <div class="text-block">
+      Before we left, he told us that we could go search the other shore of the canal for 方法科.
+    </div>
+    <button id="returnButton" class="bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition">
+                ↩  Return to Map
+        </button>
+  </div>
+  
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 粒子效果初始化
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.3, random: true },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.2, width: 1 },
+          move: { enable: true, speed: 1, direction: "none", random: true, straight: false, out_mode: "out" }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" }
+          }
+        }
+      });
+
+      const scenes = document.querySelectorAll('.scene');
+      const returnBtn = document.getElementById('returnBtn');
+      const clickableImages = document.querySelectorAll('.clickable-img');
+      
+      // 图片点击音效（可切换播放/暂停）
+      let currentAudio = null;
+      clickableImages.forEach(img => {
+        img.addEventListener('click', function() {
+          const soundUrl = this.getAttribute('data-sound');
+          if (!soundUrl) return;
+
+          // 如果当前音频已在播放，停止并重置
+          if (currentAudio && !currentAudio.paused && currentAudio.src === location.origin + '/' + soundUrl) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            currentAudio = null;
+            return;
+          }
+
+          // 停止之前的音频
+          if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+          }
+
+          // 播放新的音频
+          currentAudio = new Audio(soundUrl);
+          currentAudio.volume = 0.3;
+          currentAudio.play().catch(e => console.log('Audio play prevented:', e));
+        });
+      });
+
+      // 使用Intersection Observer API检测场景可见性
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            
+            // 如果是最后一个场景，显示返回按钮
+            if (entry.target.id === 'scene4') {
+              returnBtn.classList.add('visible');
+            } else {
+              returnBtn.classList.remove('visible');
+            }
+          } else {
+            entry.target.classList.remove('active');
+          }
+        });
+      }, { threshold: 0.5 });
+
+      scenes.forEach(scene => {
+        observer.observe(scene);
+      });
+
+      // 返回按钮点击事件
+      returnBtn.addEventListener('click', () => {
+        window.location.href = "map3dscene.html";
+      });
+    });
+    document.getElementById('returnButton').addEventListener('click', () => {
+        window.location.href = "map3dscene.html";
+    });
+  </script>
+</body>
+</html>

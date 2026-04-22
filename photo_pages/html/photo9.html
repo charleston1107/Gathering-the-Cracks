@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>天正要亮</title>
+</head>
+<body>
+    <video class="fullscreen-video" autoplay muted loop playsinline>
+     <source src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/video_assets/9-1.MP4" type="video/mp4">
+    </video>
+
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/9-1.JPG" class="overlay-image-1" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/9-2.JPG" class="overlay-image-3" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/9-3.JPG" class="overlay-image-4" />
+    
+
+    <p class="English">
+        Along the riverbank, a closer look reveals many tiny details <br>
+        Men fishing with rods, with nets, or simply squatting <br>
+
+        …An abandoned village along the canal<br>
+        Dawn is about to break; fishermen return from the nearby lake, <br>
+        boats heavy with catch<br>
+        Their stalls scatters along the riverbank<br>
+        The canal is at its emptiest hour<br>
+        Night herons skim low across the water<br>
+        I have a boat ticket, and I am about to draw a map<br>
+        Would you come along?<br>
+         
+
+     </p>
+     <p class="Chinese">
+        河岸<br>
+        定睛一看有很多细节 <br>
+        <br>
+
+        一个运河边废弃的村落<br>
+        天正要亮，渔民从附近的大湖满载而来<br>
+        散布在河畔的集市<br>
+        运河 正是空旷的时刻<br>
+        夜鹭低低地掠过水面<br>
+        我有一张船票，还有一张地图；<br>
+        哦，古老的行囊，波动的书卷<br>
+        将要描摹，隐秘的群星和沟壑<br>
+ 
+
+
+
+     </p>
+
+  <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    }
+
+
+    .Chinese {
+    position: fixed;
+    top: 50%;
+    left: 5%;
+    width: 50%;
+    font-size: 1.1em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .English {
+    position: fixed;
+    top: 50%;
+    left: 5%;
+    width: 50%;
+    font-size: 1.2em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .overlay-image-1 {
+    position: absolute;
+    inset: 0;
+    width: 30%;
+    height: 30%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 5%;
+    left: 10%;
+    }
+
+
+    .overlay-image-3 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .overlay-image-4 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .fullscreen-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;         /* fill screen */
+    object-position: center;   /* center the video */
+
+    z-index: -1;               /* behind all content */
+    }
+
+    @keyframes fadeSine {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-1 {
+    animation: fadeSine 6s ease-in-out infinite;
+    }
+
+    .overlay-image-2 {
+    animation: fadeSine 7s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg3 {
+    0%   { opacity: 0; }
+    40%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-3 {
+    animation: fadeSineImg3 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg4 {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .overlay-image-4 {
+    animation: fadeSineImg4 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinEng {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .English{
+    animation: fadeSinEng 16s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinChinese {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+    .Chinese{
+    animation: fadeSinChinese 16s ease-in-out infinite;
+    }
+
+  </style>
+</body>
+</html>

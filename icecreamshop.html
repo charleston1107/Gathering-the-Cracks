@@ -1,0 +1,268 @@
+
+<!-- memory_collage_1180/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>记忆拼贴</title>
+    <link href="https://fonts.loli.net/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: white;
+            font-family: elevon, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .text-block {
+            max-width: 600px;
+            padding: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .memory-image {
+            position: absolute;
+            width: 600px;
+            height: 300px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 2;
+            cursor: grab;
+            opacity: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .memory-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .memory-image.dragging {
+            cursor: grabbing;
+            animation: none;
+            z-index: 10;
+        }
+        
+        .memory-audio {
+            display: none;
+        }
+         #returnButton {
+            font-size: 1.5rem;          /* Bigger text */
+            padding: 1rem 2rem;         /* Expand clickable area */
+            display: inline-block;      /* Prevent shrinking inside flex/grid parents */
+            transform: scale(1); 
+            min-width: 200px; 
+            margin-top: 2rem;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 2s ease-in forwards;
+        }
+        
+        .audio-playing {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="text-block">
+        <h1>Ice Cream Shop</h1>
+        <p>Just after we parted from the house owner, we ran <br>
+             into a tiny old store, selling ice cream. We estimate <br> 
+             that the shop owner is in his 70s, and same as last time, <br>
+             he doesn’t have a clue what or where 方法科 is. <br>
+             (Click the photographs to hear sounds.)
+        </p>
+
+        <button id="returnButton" class="bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition">
+                ↩ Return to Map
+        </button>
+    </div>
+    
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/icecream/i1.jpg" alt="记忆碎片1" class="memory-image" style="top: 30%; left: 10%;" data-audio="memory1">
+    
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/icecream/i2.jpg" alt="记忆碎片2" class="memory-image" style="top: 70%; left: 80%;" data-audio="memory2">
+    <audio class="memory-audio" id="memory2" src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/audio/icecream talk.m4a" preload="auto"></audio>
+    
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/icecream/i3.jpg" alt="记忆碎片3" class="memory-image" style="top: 20%; left: 70%;" data-audio="memory3">
+    <audio class="memory-audio" id="memory3" src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/audio/buying.mp3" preload="auto"></audio>
+    
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/icecream/i4.jpg" alt="记忆碎片4" class="memory-image" style="top: 70%; left: 20%;" data-audio="memory4">
+    <audio class="memory-audio" id="memory4" src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/audio/asking.mp3" preload="auto"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化粒子效果
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ffffff" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" }
+                    }
+                }
+            });
+
+            // 图片拖拽功能
+            const images = document.querySelectorAll('.memory-image');
+            const audioElements = document.querySelectorAll('.memory-audio');
+            let currentPlayingAudio = null;
+            
+            images.forEach(img => {
+                // 图片淡入动画
+                setTimeout(() => {
+                    img.classList.add('fade-in');
+                }, Math.random() * 1000);
+                
+                // 拖拽功能
+                let isDragging = false;
+                let offsetX, offsetY;
+                
+                img.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    img.classList.add('dragging');
+                    
+                    offsetX = e.clientX - img.getBoundingClientRect().left;
+                    offsetY = e.clientY - img.getBoundingClientRect().top;
+                    
+                    e.preventDefault();
+                });
+                
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    
+                    const x = e.clientX - offsetX;
+                    const y = e.clientY - offsetY;
+                    
+                    img.style.left = `${x}px`;
+                    img.style.top = `${y}px`;
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        img.classList.remove('dragging');
+                    }
+                });
+                
+                // 边界检查
+                function checkBoundaries() {
+                    const rect = img.getBoundingClientRect();
+                    const windowWidth = window.innerWidth;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (rect.left < 0) img.style.left = '0px';
+                    if (rect.top < 0) img.style.top = '0px';
+                    if (rect.right > windowWidth) img.style.left = `${windowWidth - rect.width}px`;
+                    if (rect.bottom > windowHeight) img.style.top = `${windowHeight - rect.height}px`;
+                }
+                
+                img.addEventListener('mouseup', checkBoundaries);
+                
+                // 点击播放音频
+                img.addEventListener('click', function(e) {
+                    if (isDragging) return;
+                    
+                    const audioId = this.getAttribute('data-audio');
+                    const audio = document.getElementById(audioId);
+                    
+                    // 停止当前播放的音频
+                    if (currentPlayingAudio) {
+                        currentPlayingAudio.pause();
+                        currentPlayingAudio.currentTime = 0;
+                        const playingImg = document.querySelector(`[data-audio="${currentPlayingAudio.id}"]`);
+                        if (playingImg) playingImg.classList.remove('audio-playing');
+                    }
+                    
+                    // 播放新音频
+                    audio.play();
+                    currentPlayingAudio = audio;
+                    this.classList.add('audio-playing');
+                    
+                    // 音频结束时移除效果
+                    audio.onended = function() {
+                        const img = document.querySelector(`[data-audio="${audio.id}"]`);
+                        if (img) img.classList.remove('audio-playing');
+                    };
+                });
+            });
+            
+            // 响应式调整
+            function adjustLayout() {
+                const textBlock = document.querySelector('.text-block');
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                
+                if (windowWidth < 768) {
+                    textBlock.style.maxWidth = '90%';
+                    images.forEach(img => {
+                        img.style.width = '100px';
+                        img.style.height = '100px';
+                    });
+                } else {
+                    textBlock.style.maxWidth = '600px';
+                    images.forEach(img => {
+                        img.style.width = '150px';
+                        img.style.height = '150px';
+                    });
+                }
+            }
+            
+            window.addEventListener('resize', adjustLayout);
+            adjustLayout();
+        });
+
+        document.getElementById('returnButton').addEventListener('click', () => {
+            window.location.href = "map3dscene.html";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+
+<!-- shadow_poetry/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Demolition</title>
+  <style>
+    /*
+    body {
+      font-family: elevon, sans-serif;
+      background-color: #000;
+      color: rgba(255,255,255,1);
+      height: 100vh;
+      overflow: hidden; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }*/
+    body {
+      background-color: #000;
+      color: rgba(255,255,255,1);
+      min-height: 100vh;
+      padding-top: 2rem; /* gives breathing space */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; /* don't force everything to squeeze in center */
+    }
+
+    .image-container {
+      width: 70vw;
+      height: 70vh;
+      position: relative;
+      /* overflow: hidden; */
+      border-radius: 4px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      transition: all 0.8s ease;
+      cursor: pointer;
+    }
+    .image-container img, .image-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      position: absolute;
+      transition: opacity 1.5s ease;
+    }
+    .image-container img.active, .image-container video.active {
+      opacity: 1;
+    }
+
+    #returnButton {
+      font-size: 1.5rem;          /* Bigger text */
+      padding: 1rem 2rem;         /* Expand clickable area */
+      display: inline-block;      /* Prevent shrinking inside flex/grid parents */
+      transform: scale(1); 
+      min-width: 200px; 
+      margin-top: 2rem;
+    }
+    .poem {
+      margin-top: 2rem;
+      text-align: left;
+      opacity: 0.7;
+      font-size: 1.2rem;
+      line-height: 1.2;
+      max-width: 70vw;
+      transition: all 0.5s ease;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+
+  <div class="image-container" id="media-container">
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/demolition/bricks.png" alt="Puppy" class="active" id="current-image">
+  </div>
+  <div class="poem">
+    The first time we came to Bacheng, the old house of red brick stood quietly by the river. 
+    When we returned, it had already collapsed into scattered bricks. The trees beside it, once 
+    leaning like silent companions, had fallen too. <br>
+    <br>
+    If one pays attention, the traces of demolition are everywhere—fragments of red brick walls 
+    punctuating the streets, new concrete houses rise beside them, smooth and pale, attempting 
+    to overwrite what came before. Yet for a fleeting moment, the old and the new stand side by side, 
+    like two epochs accidentally inhabiting the same breath.
+    <br>
+    (Click on the photographs to see more.)
+    <br>
+    <button id="returnButton" class="bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition">
+      ↩ Finish Tour
+    </button>
+    <p>You have finished tour mode of Lego-ing Bacheng! Press "Finish Tour" to enter Explore Mode.</p>
+  </div>
+
+  <div>
+    
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // 粒子效果初始化
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" }
+        }
+      }
+    });
+
+    // 图片切换逻辑
+    const images = [
+    "https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/demolition/bricks.png",
+    "https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/demolition/bricks2.png",
+    "https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/demolition/walls.JPG",
+    "https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/demolition/oldnew.JPG"
+    ];
+    const currentImage = document.getElementById('current-image');
+    const mediaContainer = document.getElementById('media-container');
+    let currentIndex = 0;
+    
+    let isShowingImage = true;
+
+    function changeMedia() 
+    {
+        currentIndex = (currentIndex + 1) % images.length; // loop back to first after 4
+        currentImage.style.opacity = 0; // smooth fade-out
+
+        setTimeout(() => {
+        currentImage.src = images[currentIndex]; // change image
+        currentImage.style.opacity = 1; // fade-in
+        }, 300); // fade timing
+    }
+
+    // 点击图片容器切换媒体
+    mediaContainer.addEventListener('click', changeMedia);
+
+    document.getElementById('returnButton').addEventListener('click', function() {
+      window.location.href = "characters.html";
+      localStorage.setItem('returnedFrom', 'tour_demolition.html');
+      this.style.opacity = '0';
+      this.style.transform = 'translateY(30px)';
+      });
+  </script>
+</body>
+</html>
