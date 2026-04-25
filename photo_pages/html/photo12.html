@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chickens</title>
+</head>
+<body>
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/12-1.JPG" class="bg-img">
+
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/12-2.JPG" class="overlay-image-1" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/12-3.JPG" class="overlay-image-2" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/12-4.JPG" class="overlay-image-3" />
+
+
+    
+
+    <p class="English">
+        These plastic bags, foam boxes, the cramped cages crowded with <br>
+        chickens, ducks, and geese, the basins dipped from the river,<br>
+        I’ve seen them all. Many living things<br>
+        have died this morning. I too have touched the water.<br>
+        The vendors of vegetables and fish still sit on the ground,<br>
+        watching me from the roadside,<br>
+        for they know I will soon be gone again<br>
+
+     </p>
+
+     <p class="Chinese">
+        掘动水土的方法<br>
+        敢教日月换新天的方法<br>
+        最立竿见影的，<br>
+        建设新农村的方法<br>
+        如同乐高玩具基座上的空置，<br>
+        在整齐房屋的一侧<br>
+        篮球架，篮球场，多色的地面；<br>
+        小人等待安放。<br>
+        在遍地还是建筑材料，<br>
+        尘土与魂结之时<br>
+        在露天同时安装旱厕<br>
+        与抽水马桶的方法<br>
+        <br>
+        空心的立方体中，方方正正的办法<br>
+        焕然一新的方法，归园田居的方法<br>
+        居住或弃置，叮叮哐哐，<br>
+        难以被言说<br>
+        <br>
+        却无疑存在于汉字间隙之间的方法<br>
+        消失在人们惯常的遗忘之中<br>
+     </p>
+
+  <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    }
+
+
+    .Chinese {
+    position: fixed;
+    top: 5%;
+    left: 82%;
+    width: 50%;
+    font-size: 1.0em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .English {
+    position: fixed;
+    top: 60%;
+    left: 5%;
+    width: 50%;
+    font-size: 1.2em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .overlay-image-1 {
+    position: absolute;
+    inset: 0;
+    width: 35%;
+    height: 35%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 2%;
+    left: 2%;
+    }
+
+    .overlay-image-2 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 60%;
+    left: 60%;
+    }
+
+    .overlay-image-3 {
+    position: absolute;
+    inset: 0;
+    width: 45%;
+    height: 45%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 5%;
+    left: 40%;
+    }
+
+
+   
+
+    .background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    }
+
+    .bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fills screen, crops if needed */
+    position: absolute;
+    top: 0;
+    left: 0;
+    }
+
+    @keyframes fadeSine1 {
+    0%   { opacity: 0; }
+    55%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-1 {
+    animation: fadeSine1 6s ease-in-out infinite;
+    }
+
+    @keyframes fadeSine2 {
+    0%   { opacity: 1; }
+    45%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+    .overlay-image-2 {
+    animation: fadeSine2 6s ease-in-out infinite;
+    }
+
+    @keyframes fadeSine3 {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+    .overlay-image-3 {
+    animation: fadeSine3 6s ease-in-out infinite;
+    }
+
+   
+    
+
+    @keyframes fadeSinEng {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .English{
+    animation: fadeSinEng 16s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinChinese {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+    .Chinese{
+    animation: fadeSinChinese 20s ease-in-out infinite;
+    }
+
+  </style>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>People sit on the curb, talking</title>
+</head>
+<body>
+    
+ <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/17-4.JPG" class="bg-img">
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/17-1.JPG" class="overlay-image-1" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/17-2.JPG" class="overlay-image-3" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/17-3.JPG" class="overlay-image-4" />
+    
+
+    <p class="English">
+      When you walk deep into the fields <br>
+      you’ll notice the gaze of poultry <br>
+      Dogs, large and small, emerge from doorways <br>
+      followed by the elderly, and then those growing old <br>
+<br>
+      No one gets any closer <br>
+      Creatures seem to have been instructed since birth: be silent<br> 
+      And this river doesn’t belong to anyone either<br>
+      The unnamed ancient bridges, the unnamed rivers<br>
+      the entire village named after the big local lake, <br>
+      might not be much different<br>
+<br>
+      The earth grayish-white ––<br>
+      when we’re about to return along the same path<br>
+      an old woman approaches, heading home<br>
+      looking us over as she walks<br>
+      She smiles while asking where we came from<br>
+      talking about the rare visitors here<br>
+      And then points into the distance,<br>
+      saying whose land this is, whose graves these are<br>
+
+         
+
+     </p>
+     <p class="Chinese">
+        走到田野深处时<br>
+你会注意到家禽的张望<br>
+门洞里走出大小的犬，然后是老人，然后是将老的人<br>
+<br>
+没有人走的更近了<br>
+生灵仿佛从诞生起就被训诫：要安静<br>
+这条河也并不属于谁家<br>
+无名的古桥，无名的河流。<br>
+这以当地大湖命名的整个村落<br>
+或许没有太多区别<br>
+<br>
+大地灰白——<br>
+将要沿途而返时，走来一个还家的老人<br>
+边走边端详<br>
+她笑着问我们的来处<br>
+说起此地稀少的过客<br>
+然后又指向远处，<br>
+这是谁家的地 这是谁家的坟<br>
+
+ 
+
+
+
+     </p>
+
+  <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    }
+
+
+    .background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    }
+
+    .bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fills screen, crops if needed */
+    position: absolute;
+    top: 0;
+    left: 0;
+    }
+    .Chinese {
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    width: 50%;
+    font-size: 1.1em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .English {
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    width: 50%;
+    font-size: 1.2em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .overlay-image-1 {
+    position: absolute;
+    inset: 0;
+    width: 30%;
+    height: 30%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 5%;
+    left: 10%;
+    }
+
+
+    .overlay-image-3 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .overlay-image-4 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .fullscreen-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;         /* fill screen */
+    object-position: center;   /* center the video */
+
+    z-index: -1;               /* behind all content */
+    }
+
+    @keyframes fadeSine {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-1 {
+    animation: fadeSine 6s ease-in-out infinite;
+    }
+
+    .overlay-image-2 {
+    animation: fadeSine 7s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg3 {
+    0%   { opacity: 0; }
+    40%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-3 {
+    animation: fadeSineImg3 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg4 {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .overlay-image-4 {
+    animation: fadeSineImg4 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinEng {
+    0%   { opacity: 1; }
+    70%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .English{
+    animation: fadeSinEng 60s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinChinese {
+    0%   { opacity: 0; }
+    70%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+    .Chinese{
+    animation: fadeSinChinese 60s ease-in-out infinite;
+    }
+
+  </style>
+</body>
+</html>

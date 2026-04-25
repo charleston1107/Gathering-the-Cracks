@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>庙宇中双目的一瞬</title>
+</head>
+<body>
+    <video class="fullscreen-video" autoplay muted loop playsinline>
+     <source src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/video_assets/8.MP4" type="video/mp4">
+    </video>
+
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/8-1.JPG" class="overlay-image-1" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/8-3.JPG" class="overlay-image-3" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/8-4.JPG" class="overlay-image-4" />
+    
+
+    <p class="English">
+        Under the shade of an ancient camphor tree, a broken bridge<br>
+
+        A small shrine by the river<br>
+        <br>
+        Candles densely planted at the corner, densely <br>
+        <br>
+        People line up, taking turns to worship<br>
+        Palms pressed together<br>
+        <br>
+        For a morning of good business, or perhaps<br>
+        things that can only be articulated<br>
+        in a low murmur to oneself<br>
+        <br>
+        Thick smoke rises all around<br>
+        Beneath the thin ashes of paper offerings<br>
+        The riverbank appears even more lucid<br>
+        <br>
+        People from the nearby neighborhoods come here to worship,<br>
+        sometimes on the first day of the lunar month, sometimes on the fifteenth<br>
+        We cannot tell these signs from the moon and the constellations,<br>
+        or other signs of nature<br>
+        We simply pass through the middle of this month, silent in our watching,<br>
+        until the proper hour arrives.<br>
+     </p>
+     <p class="Chinese">
+        古树荫蔽之下断桥<br>
+        河边的小庙<br>
+        转角处插满蜡烛<br>
+        排队轮流祭拜<br>
+        双手合十<br>
+        为了一个早晨的好生意<br>
+        或是，一些只有在喃喃自语中才能说清楚的东西<br>
+        <br>
+        浓烟四起<br>
+        河岸显得澄澈<br>
+        <br>
+        纸灰<br>
+        <br>
+        附近的人们来此祭拜<br>
+        有时在农历初一，有时在农历十五<br>
+        我们无从分辨这些月亮与星座，或是其他自然的预示<br>
+        只是经过这个月半，沉默的观望<br>
+        一个合适的时辰<br>
+
+
+     </p>
+
+  <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    }
+
+    .English {
+    position: fixed;
+    top: 30%;
+    left: 5%;
+    width: 50%;
+    font-size: 1.0em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .Chinese {
+    position: fixed;
+    top: 2%;
+    left: 70%;
+    width: 50%;
+    font-size: 1.0em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .overlay-image-1 {
+    position: fixed;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    }
+
+    .overlay-image-2 {
+    position: absolute;
+    inset: 0;
+    width: 30%;
+    height: 30%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 10%;
+    left: 60%;
+    }
+
+    .overlay-image-3 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .overlay-image-4 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .fullscreen-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;         /* fill screen */
+    object-position: center;   /* center the video */
+
+    z-index: -1;               /* behind all content */
+    }
+
+    @keyframes fadeSine {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-1 {
+    animation: fadeSine 6s ease-in-out infinite;
+    }
+
+    .overlay-image-2 {
+    animation: fadeSine 7s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg3 {
+    0%   { opacity: 0; }
+    40%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-3 {
+    animation: fadeSineImg3 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg4 {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .overlay-image-4 {
+    animation: fadeSineImg4 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinEng {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+
+    .English{
+    animation: fadeSinEng 16s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinChinese {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+    .Chinese{
+    animation: fadeSinChinese 20s ease-in-out infinite;
+    }
+
+  </style>
+</body>
+</html>

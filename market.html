@@ -1,0 +1,339 @@
+
+<!-- floating_gallery/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Market</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+        }
+        #returnButton {
+        font-size: 1.5rem;          /* Bigger text */
+        padding: 1rem 2rem;         /* Expand clickable area */
+        display: inline-block;      /* Prevent shrinking inside flex/grid parents */
+        transform: scale(1); 
+        min-width: 200px; 
+        margin-top: 2rem;
+       
+        }
+        
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .floating-lane {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            animation: float 30s linear infinite;
+        }
+        
+        .floating-image {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            margin: 0 30px;
+            
+            object-fit: cover;
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .floating-image:hover {
+            transform: scale(1.2) translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3);
+            animation-play-state: paused;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(-50%) translateX(0);
+            }
+            100% {
+                transform: translateY(-50%) translateX(-100%);
+            }
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .expanded-image-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .expanded-image {
+            max-width: 60%;
+            max-height: 80%;
+            
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+        
+        .active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .active .expanded-image {
+            transform: scale(1);
+        }
+        .instructions-texts {
+        position: fixed;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-family: elevon, sans-serif;
+        font-size: 1.2rem;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px 20px;
+        border-radius: 10px;
+        z-index: 10;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles-js"></div>
+    <div class="instructions-texts">
+        <p>Click on the photographs to hear sounds.</p>
+        
+    </div>
+    <div class="text-center" style="position: absolute; top: 180px; width: 100%; z-index: 10;">
+        <button id="returnButton" class="bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition">
+                ↩ Return to Map
+        </button>
+    </div>
+    <div class="gallery-container">
+        <div class="floating-lane">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m7.jpg" class="floating-image" alt="Gallery Image 1" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/cutting.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m6.JPG" class="floating-image" alt="Gallery Image 2" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/fish.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m8.jpg" class="floating-image" alt="Gallery Image 3" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/bamboo.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m1.jpg" class="floating-image" alt="Gallery Image 4" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/buying.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m2.jpg" class="floating-image" alt="Gallery Image 5" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/market noise.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m3.jpg" class="floating-image" alt="Gallery Image 6" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/chicken.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m4.jpg" class="floating-image" alt="Gallery Image 7" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/street.mp3">
+            
+            <!-- Duplicate images for seamless looping -->
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m7.jpg" class="floating-image" alt="Gallery Image 1" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/cutting.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m6.JPG" class="floating-image" alt="Gallery Image 2" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/fish.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m8.jpg" class="floating-image" alt="Gallery Image 3" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/bamboo.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m1.jpg" class="floating-image" alt="Gallery Image 4" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/buying.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m2.jpg" class="floating-image" alt="Gallery Image 5" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/market noise.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m3.jpg" class="floating-image" alt="Gallery Image 6" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/chicken.mp3">
+            <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/img/m4.jpg" class="floating-image" alt="Gallery Image 7" data-src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/market/audio/street.mp3">
+            
+        </div>
+    </div>
+
+    <div class="expanded-image-container">
+        <img class="expanded-image" src="" alt="Expanded Image">
+        <div class="close-btn">×</div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+        
+        // Add hover sound effect
+        document.querySelectorAll('.floating-image').forEach(image => {
+            
+            // Click to expand image
+            image.addEventListener('click', () => {
+                const expandedContainer = document.querySelector('.expanded-image-container');
+                const expandedImage = document.querySelector('.expanded-image');
+                
+                expandedImage.src = image.src;
+                expandedImage.alt = image.alt;
+                expandedContainer.classList.add('active');
+                
+                // Play audio on click
+                currentAudio = new Audio(image.dataset.src);
+                currentAudio.volume = 0.5;
+                currentAudio.play();
+            });
+        });
+        
+        // Close expanded image
+        document.querySelector('.close-btn').addEventListener('click', () => {
+            document.querySelector('.expanded-image-container').classList.remove('active');
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+        });
+
+
+        document.getElementById('returnButton').addEventListener('click', () => {
+            window.location.href = "map3dscene.html";
+        });
+    </script>
+</body>
+</html>

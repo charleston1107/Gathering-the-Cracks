@@ -1,0 +1,285 @@
+
+<!-- bacheng_old_street_restaurant_story/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>八城老街 - 小餐馆的故事</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.loli.net/css?family=Noto+Serif+SC:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: elevon, sans-serif;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+      background-color: #000;
+      color: #ffffff;
+    }
+    section {
+      height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+    }
+    .story-text {
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ffffff;
+      font-size: 1.2rem;
+      line-height: 2;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 4px;
+    }
+    .story-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .audio-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(243, 234, 215, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    .audio-toggle:hover {
+      transform: scale(1.1);
+      background: rgba(243, 234, 215, 0.3);
+    }
+    .bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      transition: opacity 2s ease, transform 20s linear;
+      opacity: 0;
+    }
+    .bg-image.active {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    .vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.8);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .final-line {
+      color: #ffffff;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <section id="section1">
+    <div class="vignette"></div>
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/restaurant/r5.jpg" alt="老街背景" class="bg-image">
+    <div class="story-text">
+      <p>Previously an old storage room on Bacheng Old Street, the restaurant was refurbished by the 
+        restaurant owner as not only a wish to preserve the nostalgic tastes of home cooking when he was 
+        small, but also to tell people a fact that heritage does not need governmental certification or legends to exist or to be remembered.</p>
+    </div>
+  </section>
+
+  <section id="section2">
+    <div class="vignette"></div>
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/restaurant/r6.jpg" alt="厨房背景" class="bg-image">
+    <div class="story-text">
+      <p>Here, memory is served in bowls: fresh noodles and a broth allowed to thicken, flavours recalled from 
+        the two wonton stalls that once anchored the lane. The owner grew up when baskets were lowered from 
+        balconies to boats, when flagstones shone from decades of footsteps, and when the teahouse was dim but 
+        alive. </p>
+    </div>
+  </section>
+
+  <section id="section3">
+    <div class="vignette"></div>
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/restaurant/r7.jpg" alt="记忆背景" class="bg-image">
+    <div class="story-text">
+      <p>His kitchen keeps faith with that ordinary vibrancy. He refuses to costume food in borrowed myths—“I’m 
+        frying a pork chop—what story am I suppose to tell?”—insisting that truth tastes better. This room thus 
+        becomes a counterexample: heritage as daily practice, sustained by hands, ingredients and neighbours, 
+        not plaques, slogans or curated legends.</p>
+    </div>
+  </section>
+
+
+  <section id="section3">
+    <div class="vignette"></div>
+    <div style="background: #000; width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: -1;"></div>
+    <div class="story-text final-line">
+      <p>It invites visitors to taste what the old street once felt like—unvarnished and true
+        <br>
+        <br>
+      </p>
+       <button id="returnButton" class="bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition">
+                ↩  Next Story
+            </button>
+    </div>
+  </section>
+
+  <div class="audio-toggle">
+    <span>🔊</span>
+  </div>
+
+  <audio id="ambient-audio" loop>
+    <source src="audio/memory.m4a" type="audio/mpeg">
+  </audio>
+  <audio id="kitchen-audio" loop>
+    <source src="https://8bituniverse.com/sounds/kitchen-ambience.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize audio
+      const ambientAudio = document.getElementById('ambient-audio');
+      const kitchenAudio = document.getElementById('kitchen-audio');
+      const audioToggle = document.querySelector('.audio-toggle');
+      let isAudioPlaying = false;
+      
+      // Set initial volume
+      ambientAudio.volume = 0.5;
+      kitchenAudio.volume = 0.3;
+
+      // Audio control
+      audioToggle.addEventListener('click', function() {
+        if (isAudioPlaying) {
+          fadeOutAudio(ambientAudio);
+          fadeOutAudio(kitchenAudio);
+          audioToggle.innerHTML = '🔇';
+        } else {
+          fadeInAudio(ambientAudio);
+          fadeInAudio(kitchenAudio);
+          audioToggle.innerHTML = '🔊';
+        }
+        isAudioPlaying = !isAudioPlaying;
+      });
+
+      function fadeInAudio(audio) {
+        audio.volume = 0;
+        audio.play();
+        const fadeInInterval = setInterval(() => {
+          if (audio.volume < 0.5) {
+            audio.volume += 0.05;
+          } else {
+            clearInterval(fadeInInterval);
+          }
+        }, 100);
+      }
+
+      function fadeOutAudio(audio) {
+        const fadeOutInterval = setInterval(() => {
+          if (audio.volume > 0.05) {
+            audio.volume -= 0.05;
+          } else {
+            audio.pause();
+            clearInterval(fadeOutInterval);
+          }
+        }, 100);
+      }
+
+      // Text animation with Intersection Observer
+      const storyTexts = document.querySelectorAll('.story-text');
+      const textObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.3
+      });
+
+      storyTexts.forEach((text, index) => {
+        setTimeout(() => {
+          textObserver.observe(text);
+        }, index * 500);
+      });
+
+      // Background image transitions
+      const sections = document.querySelectorAll('section');
+      const bgImages = document.querySelectorAll('.bg-image');
+      
+      // Activate first image
+      setTimeout(() => {
+        document.querySelector('#section1 .bg-image').classList.add('active');
+      }, 1000);
+
+      // Scroll-based transitions
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            const bgImage = entry.target.querySelector('.bg-image');
+            
+            if (bgImage) {
+              bgImage.classList.add('active');
+              
+              // Audio adjustments based on section
+              if (sectionId === 'section1') {
+                ambientAudio.volume = 0.5;
+                kitchenAudio.volume = 0.3;
+              } else if (sectionId === 'section2') {
+                ambientAudio.volume = 0.3;
+                kitchenAudio.volume = 0.2;
+              } else if (sectionId === 'section3') {
+                fadeOutAudio(ambientAudio);
+                fadeOutAudio(kitchenAudio);
+              }
+            }
+          } else {
+            const bgImage = entry.target.querySelector('.bg-image');
+            if (bgImage) {
+              bgImage.classList.remove('active');
+            }
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+
+      sections.forEach(section => {
+        sectionObserver.observe(section);
+      });
+    });
+
+
+   // 返回按钮点击事件
+    document.getElementById('returnButton').addEventListener('click', function() {
+      window.location.href = "characters.html";
+      localStorage.setItem('returnedFrom', 'tour_restaurant.html');
+      this.style.opacity = '0';
+      this.style.transform = 'translateY(30px)';
+      });
+  </script>
+</body>
+</html>

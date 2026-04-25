@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>People sit on the curb, talking</title>
+</head>
+<body>
+    <video class="fullscreen-video" autoplay muted loop playsinline>
+     <source src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/video_assets/20.MP4" type="video/mp4">
+    </video>
+
+     <video class="overlay-video-1" autoplay muted loop playsinline>
+     <source src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/video_assets/20-1.MP4" type="video/mp4">
+    </video>
+
+    <video class="overlay-video-2" autoplay muted loop playsinline>
+     <source src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/video_assets/20-2.MP4" type="video/mp4">
+    </video>
+
+    
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/20-1.JPG" class="overlay-image-3" />
+    
+
+    <p class="English">
+        Certain things should be remembered… <br>
+    <br>
+        The celluloid-colored shadows and the riverbank<br>
+        <br>
+        In the breakfast shop the handmade noodles <br>
+        <br>
+        Homemade wine, sealed in clay jars with mud<br>
+        <br>
+        The clean streets; the water<br>
+        <br>
+        People sit on the curb, talking<br>
+        <br>
+        Fish scales scattered along the roadside like falling snow<br>
+        <br>
+         
+
+     </p>
+     <p class="Chinese">
+        应当记住某些事物…<br>
+<br>    
+        赛璐珞色的阴影与水岸<br>
+        <br>
+        面店铺早餐 擀面<br>
+<br>
+        笼中的公鸡啼鸣
+        <br>
+        家中自酿的酒，泥坛封口<br>
+<br>
+        洁净的街道 水<br>
+<br>
+        马路牙子上坐着攀谈<br>
+<br>
+        路边/河边到处都是鱼鳞 雪花一般<br>
+         
+
+ 
+
+
+
+     </p>
+
+  <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    }
+
+
+    .Chinese {
+    position: fixed;
+    top: 50%;
+    left: 5%;
+    width: 50%;
+    font-size: 1.1em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .English {
+    position: fixed;
+    top: 50%;
+    left: 5%;
+    width: 50%;
+    font-size: 1.2em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .overlay-image-1 {
+    position: absolute;
+    inset: 0;
+    width: 30%;
+    height: 30%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 5%;
+    left: 10%;
+    }
+
+
+    .overlay-image-3 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .overlay-image-4 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .fullscreen-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;         /* fill screen */
+    object-position: center;   /* center the video */
+
+    z-index: -1;               /* behind all content */
+    }
+
+
+    .overlay-video-1 {
+    position: absolute;
+    top: 3%;
+    left: 60%;
+    width: 40vw;
+    height: 40vh;
+
+    object-fit: cover;         /* fill screen */
+    object-position: center;   /* center the video */
+
+    z-index: 2;               /* behind all content */
+    }
+
+    .overlay-video-2 {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    width: 40vw;
+    height: 40vh;
+
+    object-fit: cover;         /* fill screen */
+    object-position: center;   /* center the video */
+
+    z-index: 2;               /* behind all content */
+    }
+
+    @keyframes fadeSine {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-1 {
+    animation: fadeSine 6s ease-in-out infinite;
+    }
+
+    .overlay-image-2 {
+    animation: fadeSine 7s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg3 {
+    0%   { opacity: 0; }
+    40%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-3 {
+    animation: fadeSineImg3 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg4 {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .overlay-image-4 {
+    animation: fadeSineImg4 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineVideo2 {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .overlay-video-2 {
+    animation: fadeSineVideo2 10s ease-in-out infinite;
+    }
+
+
+    @keyframes fadeSinEng {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .English{
+    animation: fadeSinEng 16s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinChinese {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+    .Chinese{
+    animation: fadeSinChinese 16s ease-in-out infinite;
+    }
+
+  </style>
+</body>
+</html>

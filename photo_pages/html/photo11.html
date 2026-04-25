@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To dwell or to abandon</title>
+</head>
+<body>
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/11-1.JPG" class="bg-img">
+
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/11-2.JPG" class="overlay-image-1" />
+    
+
+    <p class="English">
+        Night herons skim low across the water<br>
+        I have a boat ticket, and I am about to draw a map<br>
+        Would you come along?<br>
+
+     </p>
+
+     <p class="Chinese">
+        运河 正是空旷的时刻<br>
+        夜鹭低低地掠过水面<br>
+        我有一张船票，还有一张地图；<br>
+        哦，古老的行囊，波动的书卷<br>
+        将要描摹，隐秘的群星和沟壑<br>
+
+     </p>
+
+  <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    }
+
+
+    .Chinese {
+    position: fixed;
+    top: 10%;
+    left: 70%;
+    width: 50%;
+    font-size: 1.1em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .English {
+    position: fixed;
+    top: 7%;
+    left: 40%;
+    width: 50%;
+    font-size: 1.2em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .overlay-image-1 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 2%;
+    }
+
+    .overlay-image-2 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 60%;
+    left: 50%;
+    }
+
+
+   
+
+    .background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    }
+
+    .bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fills screen, crops if needed */
+    position: absolute;
+    top: 0;
+    left: 0;
+    }
+
+    @keyframes fadeSine1 {
+    0%   { opacity: 0; }
+    55%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-1 {
+    animation: fadeSine1 6s ease-in-out infinite;
+    }
+
+    @keyframes fadeSine2 {
+    0%   { opacity: 1; }
+    45%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+    .overlay-image-2 {
+    animation: fadeSine2 6s ease-in-out infinite;
+    }
+
+   
+    
+
+    @keyframes fadeSinEng {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .English{
+    animation: fadeSinEng 16s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinChinese {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+    .Chinese{
+    animation: fadeSinChinese 16s ease-in-out infinite;
+    }
+
+  </style>
+</body>
+</html>

@@ -1,0 +1,384 @@
+
+<!-- chinese_character_puzzle/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Character Dragging Game</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.loli.net/css?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: elevon, sans-serif;
+            background: url('https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/background.JPG') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .character {
+            position: absolute;
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 10;
+        }
+        
+        .character.dragging {
+            transform: scale(1.2);
+            z-index: 20;
+            filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.7));
+        }
+        
+        .drop-zone {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .drop-zone.active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .drop-zone.filled {
+            background: rgba(255, 215, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.9);
+        }
+        
+        .instructions {
+            position: absolute;
+            top: 60px;
+            width: 100%;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            font-size: 1.2rem;
+            
+        }
+
+        .text-button-hint
+        {
+            
+            position: absolute;
+            padding: 12px 24px;
+            left: 50px;
+            bottom: 180px;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            background-color: white;
+            font-size: 2.5rem;
+            grid-column: 2 /5;
+            transition: all 0.3s ease;
+        }
+        .text-button {
+            padding: 12px 24px;
+            font-size: 2.5rem;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        /* The hidden hint box */
+        .hint-box {
+            position: absolute;
+            top: 50%;
+            left: 110%; /* appears to the right of the button */
+            transform: translateY(-50%);
+            background-color: white;
+            color: black;
+            padding: 10px 16px;
+            font-size: 1.2rem;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            white-space: nowrap;
+        }
+        /* Hover effect: show box */
+        .text-button-hint:hover .hint-box {
+            opacity: 1;
+            transform: translateY(-50%) translateX(5px);
+        }
+
+
+        .text-button-back:hover {
+            color: rgb(0, 0, 0);
+            transform: scale(1.05);
+            text-decoration:underline;
+        }
+
+        .text-button-back
+        {
+            
+            position: absolute;
+            padding: 12px 24px;
+            left: 50px;
+            bottom: 60px;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            background-color: white;
+            font-size: 2.5rem;
+            grid-column: 2 /5;
+            transition: all 0.3s ease;
+        }
+        .text-button-back:hover {
+            color: rgb(0, 0, 0);
+            transform: scale(1.05);
+            text-decoration:underline;
+        }
+        
+
+
+
+        .transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .transition-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(5px, 10px) rotate(2deg);
+            }
+            50% {
+                transform: translate(10px, 5px) rotate(-2deg);
+            }
+            75% {
+                transform: translate(5px, -5px) rotate(1deg);
+            }
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .game-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .drop-zones-container {
+            display: flex;
+            gap: 2rem;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <div class="game-container">
+        <div class="drop-zones-container">
+            <div class="drop-zone" data-index="0"></div>
+            <div class="drop-zone" data-index="1"></div>
+            <div class="drop-zone" data-index="2"></div>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        Drag three Chinese characters into the three circles based on your interpretation of the 3 characters beneath 方法科FāngFǎKē/Method Dept.
+    </div>
+    
+    <div class="transition-overlay">
+        <div> Loading... </div>
+    </div>
+    
+
+    <section class="text-button-hint">
+        <a class="text-button">Hint.</a>
+        <div class="hint-box">This is your hint text.</div>
+    </section>
+
+    <section class="text-button-back">
+        <a href="index.html" class="text-button">Return Home.</a>
+        
+    </section>
+    
+    
+    <script>
+        const hints_list = ["针则学", "学指导", "行动处", "指导人", "拆迁办"];
+        window.addEventListener("load", () => {
+            const lastPage = localStorage.getItem("lastPage");
+            const body = document.body;
+
+            if (lastPage === "fangfake") {
+                body.style.backgroundImage = "url('https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/grandpa.jpg')";
+            } else if (lastPage === "restaurant0") {
+                body.style.backgroundImage = "url('https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/waterbamboo.jpg')";
+            } else if (lastPage === "demolition") {
+                body.style.backgroundImage = "url('https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/porkshop.png')";
+            } else {
+                body.style.backgroundImage = "url('https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/assets/img/background.JPG')";
+            }
+
+            body.style.backgroundSize = "cover";
+            body.style.backgroundPosition = "center";
+            body.style.backgroundRepeat = "no-repeat";
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const characters = ['拆', '迁', '科', '学', '指', '导', '行', '动', '处', '办', '人', '务'];
+            let selectedChars = ["", "", ""]; // Store the chosen characters in order
+            const dropZones = document.querySelectorAll('.drop-zone');
+            const transitionOverlay = document.querySelector('.transition-overlay');
+            let filledCount = 0;
+            
+            // 创建浮动字符
+            characters.forEach(char => {
+                const element = document.createElement('div');
+                element.className = 'character';
+                element.textContent = char;
+                element.draggable = true;
+                
+                // 随机位置
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 100);
+                element.style.left = `${x}px`;
+                element.style.top = `${y}px`;
+                
+                // 随机动画延迟
+                element.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+                element.style.animationDelay = `${Math.random() * 2}s`;
+                
+                // 拖拽事件
+                element.addEventListener('dragstart', dragStart);
+                element.addEventListener('dragend', dragEnd);
+                
+                document.body.appendChild(element);
+            });
+            
+            // 拖拽区事件
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', dragOver);
+                zone.addEventListener('dragleave', dragLeave);
+                zone.addEventListener('drop', drop);
+            });
+            
+            function dragStart(e) {
+                this.classList.add('dragging');
+                e.dataTransfer.setData('text/plain', this.textContent);
+                setTimeout(() => this.style.display = 'none', 0);
+            }
+            
+            function dragEnd() {
+                this.classList.remove('dragging');
+                this.style.display = '';
+            }
+            
+            function dragOver(e) {
+                e.preventDefault();
+                this.classList.add('active');
+            }
+            
+            function dragLeave() {
+                this.classList.remove('active');
+            }
+            
+            function drop(e) {
+                e.preventDefault();
+                this.classList.remove('active');
+                
+                if (this.hasChildNodes()) return;
+                
+                const char = e.dataTransfer.getData('text/plain');
+                const charElement = document.createElement('div');
+                charElement.className = 'character';
+                charElement.textContent = char;
+                charElement.style.animation = 'none';
+                charElement.style.position = 'static';
+                charElement.style.fontSize = '2rem';
+                
+                this.appendChild(charElement);
+                this.classList.add('filled');
+                
+                const index = parseInt(this.dataset.index);
+                selectedChars[index] = char; // Save the character in the correct position
+                
+
+                filledCount++;
+                
+                if (filledCount === 3) {
+                    const combination = selectedChars.join("");
+                    console.log("Selected combination:", combination);
+                    // Add transition overlay
+                    transitionOverlay.classList.add('active');
+
+                     setTimeout(() => {
+                        //transitionOverlay.classList.add('active');
+                        if (combination === "行动处") 
+                        {
+                            localStorage.setItem("lastPage", "fangfake");
+                            window.location.href = "fangfake.html";
+                        } 
+                        else if (combination === "科学指") 
+                        {
+                            localStorage.setItem("lastPage", "restaurant0");
+                            window.location.href = "restaurant0.html";
+                        } 
+                        else if (combination === "为人务") 
+                        {
+                            localStorage.setItem("lastPage", "demolition");
+                            window.location.href = "demolition.html";
+                        } 
+                        else
+                        {
+                            window.location.reload();
+                        }
+                        //window.location.assign("restaurant0.html");
+                        /** setTimeout(() => {
+                            alert('正在开发中');
+                            location.reload();
+                        }, 2000);
+                        */
+                    }, 500);
+                    
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page One</title>
+</head>
+<body>
+  <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/4.JPG" class="bg-img">
+   <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/4-1.JPG" class="overlay-image-1" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/4-2.JPG" class="overlay-image-2" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/4-3.JPG" class="overlay-image-3" />
+    <img src="https://pub-4d457e07e6ef4aaa8ac96b51bf19ad36.r2.dev/photo_pages/photo_assets/4-4.JPG" class="overlay-image-4" />
+    <p class="Chinese">
+        走到田野深处时<br>
+        你会注意到家禽的张望<br>
+        门洞里走出大小的犬，然后是老人，然后是将老的人<br>
+        <br>
+        没有人走的更近了<br>
+        生灵仿佛从诞生起就被训诫：要安静<br>
+        这条河也并不属于谁家<br>
+        无名的古桥，无名的河流。<br>
+        这以当地大湖命名的整个村落<br>
+        或许没有太多区别<br>
+<br>
+        大地灰白——<br>
+        将要沿途而返时，走来一个还家的老人<br>
+        边走边端详<br>
+        她笑着问我们的来处<br>
+        说起此地稀少的过客<br>
+        然后又指向远处，<br>
+        这是谁家的地 这是谁家的坟<br>
+
+    </p>
+  <style>
+    .background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    }
+    
+    .bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fills screen, crops if needed */
+    position: absolute;
+    top: 0;
+    left: 0;
+    }
+
+    .Chinese {
+    position: fixed;
+    top: 10%;
+    left: 65%;
+    width: 50%;
+    font-size: 1.1em;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 2;
+    }
+
+    .overlay-image-1 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 53%;
+    left: 3%;
+    }
+
+    .overlay-image-2 {
+    position: absolute;
+    inset: 0;
+    width: 30%;
+    height: 30%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 5%;
+    left: 30%;
+    }
+    .overlay-image-3 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    .overlay-image-4 {
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;      /* or cover, depending on what you want */
+    z-index: 1;
+    pointer-events: none;     /* clicking goes through image */
+    top: 55%;
+    left: 60%;
+    }
+
+    @keyframes fadeSine {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-1 {
+    animation: fadeSine 6s ease-in-out infinite;
+    }
+
+    .overlay-image-2 {
+    animation: fadeSine 7s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg3 {
+    0%   { opacity: 0; }
+    40%  { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .overlay-image-3 {
+    animation: fadeSineImg3 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSineImg4 {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    .overlay-image-4 {
+    animation: fadeSineImg4 10s ease-in-out infinite;
+    }
+
+    @keyframes fadeSinEng {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+  </style>
+</body>
+</html>
