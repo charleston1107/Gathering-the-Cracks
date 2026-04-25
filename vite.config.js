@@ -16,5 +16,5 @@ export default defineConfig({
       input: pages
     }
   },
-  base: "/Gathering-the-Cracks"
+  base: "/Gathering-the-Cracks/"
 })
