@@ -42,8 +42,6 @@ loader.load('./assets/3d/HdrSkyOvercast001_JPG_1K.jpg', (texture) => {
 });
 
 
-
-
 loader.load('./public/Bacheng1_test1_merged3.glb', (gltf) => {
   const model = gltf.scene;
 
