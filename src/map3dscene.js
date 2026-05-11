@@ -41,7 +41,7 @@ const loader = new GLTFLoader();
   scene.background = texture;
 }); */
 
-loader.load(`${import.meta.env.BASE_URL}Bacheng1_test1_merged3.glb`, (gltf) => {
+loader.load('/Gathering-the-Cracks/Bacheng1_test1_merged3.glb', (gltf) => {
   const model = gltf.scene;
 
   model.position.set(-5,-6,-10);
