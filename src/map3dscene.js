@@ -41,8 +41,7 @@ loader.load('./assets/3d/HdrSkyOvercast001_JPG_1K.jpg', (texture) => {
   scene.background = texture;
 });
 
-
-loader.load('Gathering-the-Cracks/public/Bacheng1_test1_merged3.glb', (gltf) => {
+loader.load(`${import.meta.env.BASE_URL}Bacheng1_test1_merged3.glb`, (gltf) => {
   const model = gltf.scene;
 
   model.position.set(-5,-6,-10);
@@ -54,9 +53,24 @@ loader.load('Gathering-the-Cracks/public/Bacheng1_test1_merged3.glb', (gltf) => 
 });
 
 
+
+/* loader.load('Bacheng1_test1_merged3.glb', (gltf) => {
+  const model = gltf.scene;
+
+  model.position.set(-5,-6,-10);
+  model.rotation.y = Math.PI;   // rotates 180° around Z axis
+
+  scene.add(model);
+}, undefined, (err) => {
+  console.error(err);
+});
+
+*/
+
+
 let bricks=null;
 let brickOriginalY = 0;
-loader.load('./public/bricks1.glb', (gltf) => {
+loader.load('bricks1.glb', (gltf) => {
   bricks = gltf.scene;
   bricks.position.set(-15,-6,-35);
   brickOriginalY = bricks.position.y;
@@ -75,7 +89,7 @@ loader.load('./public/bricks1.glb', (gltf) => {
 
 let noodles = null;
 let noodlesOriginalY = 0;
-loader.load('./public/noodles-2.glb', (gltf) => {
+loader.load('noodles-2.glb', (gltf) => {
   noodles = gltf.scene;
   noodles.position.set(8,-2,-11);
   noodlesOriginalY = noodles.position.y;
@@ -94,7 +108,7 @@ loader.load('./public/noodles-2.glb', (gltf) => {
 
 let icecream = null;
 let icecreamOriginalY = 0;
-loader.load('./public/icecream3.glb', (gltf) => {
+loader.load('icecream3.glb', (gltf) => {
   icecream = gltf.scene;
   icecream.position.set(12,-5,-25);
   icecreamOriginalY = icecream.position.y;
@@ -111,7 +125,7 @@ loader.load('./public/icecream3.glb', (gltf) => {
 
 let fish = null;
 let fishOriginalY = 0;
-loader.load('./public/fish4-2.glb', (gltf) => {
+loader.load('fish4-2.glb', (gltf) => {
   fish = gltf.scene;
   fish.position.set(-3,-7,-9);
   fishOriginalY = fish.position.y;
@@ -129,7 +143,7 @@ loader.load('./public/fish4-2.glb', (gltf) => {
 
 let buttonBoat = null;
 let buttonBoatOriginalY = 0;
-loader.load('./public/button.glb', (gltf) => {
+loader.load('button.glb', (gltf) => {
   buttonBoat = gltf.scene;
   buttonBoat.position.set(-4.5,-3,-20);
   buttonBoat.rotateY(-Math.PI/2);
@@ -148,7 +162,7 @@ loader.load('./public/button.glb', (gltf) => {
  
 let buttonRice = null;
 let buttonRiceOriginalY = 0;
-loader.load('./public/button.glb', (gltf) => {
+loader.load('button.glb', (gltf) => {
   buttonRice = gltf.scene;
   buttonRice.position.set(-13,5,-45);
   buttonRice.rotateY(-Math.PI/2);
@@ -167,7 +181,7 @@ loader.load('./public/button.glb', (gltf) => {
 
 let buttonDog = null;
 let buttonDogOriginalY = 0;
-loader.load('./public/button.glb', (gltf) => {
+loader.load('button.glb', (gltf) => {
   buttonDog = gltf.scene;
   buttonDog.position.set(24,-4,-16);
   buttonDog.rotateY(-Math.PI/2);
@@ -205,7 +219,7 @@ loader.load('/button.glb', (gltf) => {
 
 let buttonTin1 = null;
 let buttonTin1OriginalY = 0;
-loader.load('./public/button.glb', (gltf) => {
+loader.load('button.glb', (gltf) => {
   buttonTin1 = gltf.scene;
   buttonTin1.position.set(19,-2,-28);
   buttonTin1.rotateY(-Math.PI/2);
@@ -223,7 +237,7 @@ loader.load('./public/button.glb', (gltf) => {
 
 let buttonTin2 = null;
 let buttonTin2OriginalY = 0;
-loader.load('./public/button.glb', (gltf) => {
+loader.load('button.glb', (gltf) => {
   buttonTin2 = gltf.scene;
   buttonTin2.position.set(-19,-2,-28);
   buttonTin2.rotateY(-Math.PI/2);
