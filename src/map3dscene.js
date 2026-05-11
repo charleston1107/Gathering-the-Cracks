@@ -207,7 +207,7 @@ loader.load('/button.glb', (gltf) => {
 
 let buttonTin1 = null;
 let buttonTin1OriginalY = 0;
-loader.load('/button.glb', (gltf) => {
+loader.load('./public/button.glb', (gltf) => {
   buttonTin1 = gltf.scene;
   buttonTin1.position.set(19,-2,-28);
   buttonTin1.rotateY(-Math.PI/2);
