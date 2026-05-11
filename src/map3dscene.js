@@ -42,7 +42,7 @@ loader.load('./assets/3d/HdrSkyOvercast001_JPG_1K.jpg', (texture) => {
 });
 
 
-loader.load('./public/Bacheng1_test1_merged3.glb', (gltf) => {
+loader.load('Gathering-the-Cracks/public/Bacheng1_test1_merged3.glb', (gltf) => {
   const model = gltf.scene;
 
   model.position.set(-5,-6,-10);
