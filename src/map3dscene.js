@@ -36,10 +36,10 @@ const mouse = new Vector2();
 
 const loader = new GLTFLoader();
 
-loader.load('./assets/3d/HdrSkyOvercast001_JPG_1K.jpg', (texture) => {
+/* loader.load('./assets/3d/HdrSkyOvercast001_JPG_1K.jpg', (texture) => {
   texture.colorSpace = THREE.SRGBColorSpace;
   scene.background = texture;
-});
+}); */
 
 loader.load(`${import.meta.env.BASE_URL}Bacheng1_test1_merged3.glb`, (gltf) => {
   const model = gltf.scene;
