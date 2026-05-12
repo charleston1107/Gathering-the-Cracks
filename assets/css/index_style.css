@@ -1,23 +1,124 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+section {
+  width: 100%;
+  position: relative;
+}
+
+/* Section 1 */
+#hero-section {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: black;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/Gathering-the-Cracks/your-cover-image.jpg');
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 6vw, 5rem);
+  margin: 0;
+}
+
+.hero-subtitle {
+  margin-top: 1rem;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  opacity: 0.9;
+}
+
+/* Section 2 */
+#entry-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f2ea;
+  padding: 2rem;
+}
+
+.entry-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  width: min(90vw, 700px);
+}
+
+.entry-link {
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  transition: all 0.25s ease;
+}
+
+.entry-link:hover {
+  background: black;
+  color: white;
+}
+
+/* Section 3 */
+#poem-section {
+  min-height: 100vh;
+  position: relative;
+  padding: 4rem 0;
+}
+
+
+
 @font-face {
   font-family: "zhuanshu";
-  src: url("../assets/css/zhuanshu_1.ttf") format("truetype");
+  src: url("./zhuanshu_1.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "zhuanshu";
-  src: url("../assets/css/zhuanshu_1.ttf") format("truetype");
+  src: url("./zhuanshu_1.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 
 
 /* Make the background fill the whole screen */
-body, html {
+html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /*
@@ -38,7 +139,7 @@ body, html {
   height: auto;
   min-height: 200vh; /* ensures page has vertical scroll */
   
-  background-image: url('background_texture_transparent.png');  /* <-- replace this file name */
+  background-image: url('background_texture_transparent.png');  
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 100% auto; /* scale width to screen, keep proportions */
@@ -145,15 +246,22 @@ body, html {
   height: 100%;
   overflow: hidden;
 }*/
-#wavy-container {
+
+/* #wavy-container {
   width: 100vw;
-  height: 200vh; /* same as your scroll height */
+  height: 200vh; /* same as your scroll height 
   top: 0;
   left: 0;
   overflow: visible;
   position: absolute;
-}
+} */
 
+#wavy-container {
+  position: relative;
+  width: 100%;
+  min-height: 200vh;
+  overflow: visible;
+}
 
 .wavy-line {
   position: absolute;
