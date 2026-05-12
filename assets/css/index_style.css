@@ -16,16 +16,15 @@ section {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  /* background: black;*/
+  background: black;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('background_texture_transparent.png');
+  background-image: url('hero-background.png');
   background-size: cover;
   background-position: center;
-  z-index: 1;
   will-change: transform;
   transition: transform 0.1s linear;
 }
@@ -90,11 +89,15 @@ section {
 
 /* Section 3 */
 #poem-section {
-  min-height: 100vh;
   position: relative;
-  padding: 4rem 0;
+  width: 100%;
 }
 
+.poem-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 
 @font-face {
@@ -162,6 +165,7 @@ html, body {
               transform 0.4s ease,
               text-shadow 0.4s ease;
   cursor: pointer;
+  z-index: 3;
 
   /* Floating animation */
   animation: float 6s ease-in-out infinite alternate;
@@ -259,9 +263,10 @@ html, body {
 } */
 
 #wavy-container {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  min-height: 200vh;
+  height: 100%;
   overflow: visible;
 }
 
@@ -276,6 +281,7 @@ html, body {
   opacity: 0.9;
   transform: translate(-50%, -50%);
   display: inline-block; /* ← necessary */
+  z-index: 2;
 }
 
 /* characters inside each sentence */
