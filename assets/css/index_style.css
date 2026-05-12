@@ -46,6 +46,7 @@ section {
   font-size: clamp(2rem, 6vw, 5rem);
   margin: 0;
   font-family: 'Times New Roman', Times, serif;
+  color:black;
 }
 
 .hero-subtitle {
@@ -53,6 +54,7 @@ section {
   font-size: clamp(1rem, 2vw, 1.5rem);
   font-family: 'Times New Roman', Times, serif;
   opacity: 0.9;
+  color: black;
 }
 
 /* Section 2 */
@@ -61,7 +63,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f2ea;
+  background-image: url('entry-bg.jpg');
   padding: 2rem;
 }
 
@@ -75,8 +77,8 @@ section {
 
 .entry-link {
   text-decoration: none;
-  color: black;
-  border: 1px solid black;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
   padding: 1rem 1.5rem;
   width: 100%;
   text-align: center;
@@ -85,7 +87,7 @@ section {
 }
 
 .entry-link:hover {
-  background: black;
+  background: rgb(177, 153, 72);
   color: white;
 }
 
