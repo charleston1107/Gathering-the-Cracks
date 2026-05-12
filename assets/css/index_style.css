@@ -137,13 +137,17 @@ section {
 
 .entry-inner {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1.2rem;
   align-items: center;
-  width: min(90vw, 700px);
+  /* width: min(90vw, 700px);*/
+  justify-content: center;
+  width: 100%;
 }
 
 .entry-link {
+  /* previous: vertical stacked */
+  /*
   text-decoration: none;
   color: rgb(255, 255, 255);
   border: 1px solid rgb(255, 255, 255);
@@ -152,10 +156,27 @@ section {
   text-align: center;
   font-size: clamp(1rem, 2vw, 1.3rem);
   transition: all 0.25s ease;
+  */
+
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
+  width: min(35vw, 400px);
+  aspect-ratio: 1 / 1;
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+
 }
 
 .entry-link:hover {
-  background: rgb(177, 153, 72);
+  background: rgb(177, 153, 72, 60%);
   color: white;
 }
 
