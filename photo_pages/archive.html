@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Scroll Page</title>
+  <link rel="stylesheet" href="assets/css/image-scroll.css" />
+</head>
+<body>
+  <main class="page">
+    <a href="/Gathering-the-Cracks/index.html" class="top-link">← back</a>
+
+    <div class="image-stack">
+      <img src="/Gathering-the-Cracks/assets/archive/map_1.jpg" alt="" />
+      <img src="/Gathering-the-Cracks/assets/archive/map_2.jpg" alt="" />
+      <img src="/Gathering-the-Cracks/assets/archive/map_3.jpg" alt="" />
+      <img src="/Gathering-the-Cracks/assets/archive/map_4.jpg" alt="" />
+    </div>
+  </main>
+
+  <style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background: white;
+        }
+
+        .page {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 0 5rem;
+        box-sizing: border-box;
+        }
+
+        .top-link {
+        width: 90%;
+        display: block;
+        margin-bottom: 3rem;
+        color: black;
+        text-decoration: none;
+        font-size: 1.1rem;
+        }
+
+        .top-link:hover {
+        text-decoration: underline;
+        }
+
+        .image-stack {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem; /* blank space between images */
+        }
+
+        .image-stack img {
+        width: 90%;
+        height: auto;
+        display: block;
+        }
+    </style>
+</body>
+</html>
