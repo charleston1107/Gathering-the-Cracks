@@ -16,15 +16,16 @@ section {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background: black;
+  /* background: black;*/
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('/Gathering-the-Cracks/your-cover-image.jpg');
+  background-image: url('background_texture_transparent.png');
   background-size: cover;
   background-position: center;
+  z-index: 1;
   will-change: transform;
   transition: transform 0.1s linear;
 }
@@ -134,16 +135,17 @@ html, body {
 
 
 /* Full background image scroll layer */
+/*
 #content {
   width: 100vw;
   height: auto;
-  min-height: 200vh; /* ensures page has vertical scroll */
+  min-height: 200vh; /* ensures page has vertical scroll 
   
   background-image: url('background_texture_transparent.png');  
   background-repeat: no-repeat;
   background-position: center top;
-  background-size: 100% auto; /* scale width to screen, keep proportions */
-}
+  background-size: 100% auto; /* scale width to screen, keep proportions 
+} */
 
 
 /* General floating text styling */
