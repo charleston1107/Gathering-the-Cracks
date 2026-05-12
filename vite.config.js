@@ -64,7 +64,7 @@ export default defineConfig({
 
 */
 
-/* Ver 3 */
+/* Ver 3: 3D Map worked after changing this I think. */
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import fs from "fs";
