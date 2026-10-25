@@ -1,6 +1,20 @@
-<iframe 
-  src="Gathering-the-Cracks/assets/imgnew/GatheringtheCracks.pdf" 
-  width="100%" 
-  height="800px"
-  style="border: none;">
-</iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Book · Gathering the Cracks</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #eee; }
+    nav { height: 3rem; display: flex; align-items: center; gap: 2rem; padding: 0 1rem; }
+    a { color: #222; }
+    iframe { display: block; width: 100%; height: calc(100% - 3rem); border: 0; }
+  </style>
+  <script type="module" crossorigin src="/Gathering-the-Cracks/assets/photobook-BpK_QFTZ.js"></script>
+  <link rel="modulepreload" crossorigin href="/Gathering-the-Cracks/assets/modulepreload-polyfill-B5Qt9EMX.js">
+</head>
+<body>
+  <nav><a href="./index.html">← back</a><a id="pdf-link">Open PDF</a></nav>
+  <iframe id="photobook" title="Gathering the Cracks photo book"></iframe>
+</body>
+</html>
