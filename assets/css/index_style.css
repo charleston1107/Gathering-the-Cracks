@@ -326,10 +326,10 @@ html, body {
 
 
 
-.t1 { top: 20%; left: 15%; animation-delay: 0s; }
+.t1 { top: 14%; left: 15%; animation-delay: 0s; }
 .t2 { top: 35%; left: 50%; animation-delay: 1s; }
 .t3 { top: 60%; left: 45%; animation-delay: 2s; }
-.t4 { top: 10%; left: 70%; animation-delay: 0.5s; }
+.t4 { top: 4%; left: 70%; animation-delay: 0.5s; }
 .t5 { top: 45%; left: 80%; animation-delay: 1.5s; }
 .t6 { top: 75%; left: 60%; animation-delay: 2.5s; }
 .t7 { top: 25%; left: 40%; animation-delay: 3s; }

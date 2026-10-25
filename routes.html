@@ -40,15 +40,7 @@
       opacity: 1;
     }
 
-    #returnButton {
-      font-size: 1.5rem;          /* Bigger text */
-      font-family: 'Times New Roman', Times, serif;
-      padding: 1rem 2rem;         /* Expand clickable area */
-      display: inline-block;      /* Prevent shrinking inside flex/grid parents */
-      transform: scale(1); 
-      min-width: 200px; 
-      margin-top: 2rem;
-    }
+
     .poem {
       margin-top: 2rem;
       text-align: left;
@@ -67,8 +59,10 @@
       z-index: -1;
     }
   </style>
+  <link rel="stylesheet" href="assets/css/page-back.css" />
 </head>
 <body>
+  <a class="page-back" href="./index.html">← back</a>
   <div id="particles-js"></div>
 
   <div class="poem">
@@ -93,14 +87,11 @@ Chicken，duck，pigeon：Dafeng（江苏大丰）——Bacheng Market （8am-6p
 
 </div>
 
-    <button id="returnButton" class="bg-white text-black text-xl px-9 py-6 font-bold transition transform hover:scale-110 hover:underline">↩ Return Home</button>
-  </div>
-
  
     
     
 
 
-  </script>
+
 </body>
 </html>

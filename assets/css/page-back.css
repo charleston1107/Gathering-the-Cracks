@@ -1,0 +1,20 @@
+a.page-back {
+  position: fixed;
+  top: 3rem;
+  left: 5%;
+  z-index: 10000;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  color: white;
+  background: transparent;
+  mix-blend-mode: difference;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  text-decoration: none;
+}
+a.page-back:hover, a.page-back:focus-visible {
+  text-decoration: underline;
+}
